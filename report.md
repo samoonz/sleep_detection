@@ -63,7 +63,7 @@ YOLO chỉ lấy `classes=[0]`, tương ứng `person` trong model COCO được
 
 ### 3.2. Tracking và quản lý ID
 
-Hệ thống gọi `model.track(..., persist=True)` với [classroom_bytetrack.yaml](classroom_bytetrack.yaml). Chỉ kết quả đã có ID mới được đưa vào bảng và vẽ box trạng thái. Vì vậy, số người hiển thị chịu ảnh hưởng của cả detector lẫn tracker.
+Hệ thống gọi `model.track(..., persist=True)` với [pose_bytetrack.yaml](pose_bytetrack.yaml). Chỉ kết quả đã có ID mới được đưa vào bảng và vẽ box trạng thái. Vì vậy, số người hiển thị chịu ảnh hưởng của cả detector lẫn tracker.
 
 ByteTrack sử dụng các mức confidence khác nhau để ghép detection với track. Dự đoán ở nhóm confidence thấp có thể hỗ trợ phục hồi track đã tồn tại nhưng không tự khởi tạo track mới. Tham khảo [tài liệu tracking của Ultralytics](https://docs.ultralytics.com/modes/track/).
 
@@ -144,7 +144,7 @@ Các mẫu số thay đổi theo ngưỡng người dùng đặt. `score` không
 
 | Tham số | Giá trị hiện tại |
 | --- | --- |
-| Weights người | `yolov8n.pt`, pretrained COCO |
+| Weights người | `yolov8l-pose.pt`, pretrained COCO |
 | Detector mặt | MediaPipe Face Detection, `model_selection=1` |
 | Confidence người | 0.35 |
 | YOLO `imgsz` | 640 |
@@ -273,7 +273,7 @@ Nếu chẩn đoán cho thấy box hai người chồng lấn bị NMS loại, c
 
 ### 8.3. Ưu tiên 2: YOLOv8s hoặc YOLOv8m
 
-So sánh `yolov8n.pt` với `yolov8s.pt`, sau đó `yolov8m.pt` nếu đủ tài nguyên. Bản s/m có độ chính xác COCO công bố cao hơn bản n và chi phí tính toán lớn hơn; chưa đảm bảo mức tăng recall tương ứng trên lớp học. Tham khảo [bảng YOLOv8 của Ultralytics](https://docs.ultralytics.com/models/yolov8/).
+So sánh `yolov8l-pose.pt` với `yolov8s.pt`, sau đó `yolov8m.pt` nếu đủ tài nguyên. Bản s/m có độ chính xác COCO công bố cao hơn bản n và chi phí tính toán lớn hơn; chưa đảm bảo mức tăng recall tương ứng trên lớp học. Tham khảo [bảng YOLOv8 của Ultralytics](https://docs.ultralytics.com/models/yolov8/).
 
 UI đã cho nhập weights nhưng file phải tồn tại; ứng dụng không tự tải khi đường dẫn thiếu. So sánh trên cùng frame, confidence, `imgsz`, giới hạn detection và thiết bị trước khi tối ưu riêng từng model.
 
@@ -344,7 +344,7 @@ python -m streamlit run classroom_app.py
 | [pipeline.md](pipeline.md) | Bài toán và kiến trúc ban đầu |
 | [classroom_core.py](classroom_core.py) | Detection, tracking, landmark, luật thời gian, đọc/ghi video |
 | [classroom_app.py](classroom_app.py) | UI, nguồn đầu vào, hiển thị và tải kết quả |
-| [classroom_bytetrack.yaml](classroom_bytetrack.yaml) | Ngưỡng tracker thực tế |
+| [pose_bytetrack.yaml](pose_bytetrack.yaml) | Ngưỡng tracker thực tế |
 | [requirements-classroom.txt](requirements-classroom.txt) | Phiên bản dependency |
 | [tests/test_classroom_core.py](tests/test_classroom_core.py) | 16 test logic, hình học và xuất video |
 | [outputs/classroom_smoke.csv](outputs/classroom_smoke.csv) | Quan sát clip hai vùng người |

@@ -1,0 +1,26 @@
+# Keep only the current classroom YOLOv8 + MediaPipe pipeline.
+# Everything else stays local, including legacy code, datasets, training runs,
+# other models, videos, outputs, virtual environments, caches and secrets.
+# Add an explicit exception below when introducing a required project file.
+/*
+!/.gitignore
+
+# Application, inference logic and ByteTrack configuration
+!/classroom_app.py
+!/classroom_core.py
+!/pose_bytetrack.yaml
+!/pose_tracking.py
+!/requirements-classroom.txt
+
+# Shared YOLOv8-Pose weight used by both projects. The file is large; keep it local or copy it from the wall-climbing repo.
+!/yolov8l-pose.pt
+
+# Documentation for the current method
+!/README.md
+!/pipeline.md
+!/report.md
+
+# Tests for the current inference pipeline; exclude caches and other test data
+!/tests/
+/tests/*
+!/tests/test_classroom_core.py

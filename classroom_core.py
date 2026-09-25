@@ -200,16 +200,22 @@ class ClassroomEngine:
             import lap  # noqa: F401; prevent Ultralytics installing dependencies during inference
         except ImportError as exc:
             raise RuntimeError("Thiếu ByteTrack dependency: python -m pip install lapx==0.5.9") from exc
-        if not cfg.person_weights or not Path(cfg.person_weights).is_file():
-            raise FileNotFoundError(
-                f"Không tìm thấy weights YOLOv8-Pose: {cfg.person_weights}. "
-                "Dùng cùng yolov8l-pose.pt với project wall-climbing."
-            )
+        if not cfg.person_weights:
+            raise ValueError("Phải cung cấp weights YOLOv8-Pose.")
+        pose_weights = cfg.person_weights
+        if not Path(pose_weights).is_file():
+            # For the official Ultralytics asset, allow YOLO to download it on
+            # first run. Offline deployments can copy the same file from the
+            # wall-climbing repository into this project directory.
+            if Path(pose_weights).name == "yolov8l-pose.pt":
+                pose_weights = "yolov8l-pose.pt"
+            else:
+                raise FileNotFoundError(f"Không tìm thấy weights YOLOv8-Pose: {cfg.person_weights}")
         if cfg.face_weights and not Path(cfg.face_weights).is_file():
             raise FileNotFoundError(f"Không tìm thấy weights khuôn mặt: {cfg.face_weights}")
         self.cfg, self.states = cfg, {}
         self.device = (0 if torch.cuda.is_available() else "cpu") if cfg.device == "auto" else cfg.device
-        self.person = YOLO(cfg.person_weights)
+        self.person = YOLO(pose_weights)
         if self.person.task != "pose" or self.person.names.get(0) != "person":
             raise ValueError("Model phải là YOLOv8-Pose COCO, class 0 = person.")
         self.face_model = YOLO(cfg.face_weights) if cfg.face_weights else None

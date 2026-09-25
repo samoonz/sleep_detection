@@ -80,7 +80,7 @@ Kiểm tra gồm nhắm mắt/ngáp/gục đầu độc lập, mất landmark, t
 - [pose_tracking.py](pose_tracking.py): front-end chung `YOLOv8-Pose + ByteTrack -> bbox + ID + 17 keypoints`.
 - [pose_bytetrack.yaml](pose_bytetrack.yaml): cấu hình tracking dùng chung.
 - [requirements-classroom.txt](requirements-classroom.txt): thư viện để chạy demo và kiểm thử.
-- `yolov8l-pose.pt`: pretrained YOLOv8-Pose dùng chung với project wall-climbing. Do file lớn, repo code có thể không kèm weight; đặt file này ở thư mục gốc trước khi chạy.
+- `yolov8l-pose.pt`: pretrained YOLOv8-Pose dùng chung với project wall-climbing. Nếu file chưa có, Ultralytics sẽ thử tải official weight ở lần chạy đầu; khi chạy offline, copy file `yolov8l-pose.pt` từ repo `samoonz/wall-climbing-intrusion-detection` vào thư mục gốc.
 - [tests/test_classroom_core.py](tests/test_classroom_core.py): kiểm thử logic, hình học và xuất video.
 - `README.md`, [pipeline.md](pipeline.md), [report.md](report.md): hướng dẫn và báo cáo phương pháp hiện tại.
 - [.gitignore](.gitignore): chỉ cho phép Git theo dõi các file trong danh sách này.

@@ -1,0 +1,11 @@
+# Python 3.10 or 3.11. Keep the legacy MediaPipe Solutions API used by pipeline.md.
+ultralytics==8.2.73
+mediapipe==0.10.14
+streamlit==1.37.1
+numpy==1.26.4
+opencv-python==4.10.0.84
+opencv-contrib-python==4.10.0.84
+torch==2.4.0
+torchvision==0.19.0
+lapx==0.5.9
+imageio-ffmpeg==0.5.1
